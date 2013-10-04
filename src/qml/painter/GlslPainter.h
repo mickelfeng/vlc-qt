@@ -23,15 +23,12 @@
 #define VLCQT_PHONON_GLSLPAINTER_H_
 
 #include <QtCore/QRectF>
+#include <QtCore/QTime>
 #include <QtQuick/QQuickWindow>
-
-#if !defined(Q_OS_WIN32)
-    #include <QtCore/QTime>
-#endif
 
 #include "qml/painter/GlPainter.h"
 
-class QGLShaderProgram;
+class QOpenGLShaderProgram;
 class QPainter;
 class QQuickWindow;
 
@@ -49,9 +46,8 @@ public:
                QQuickWindow *window);
 
 private:
-    QGLShaderProgram *_program;
+    QOpenGLShaderProgram *_program;
 
-#if !defined(Q_OS_WIN32)
     void calculateFPS();
     void addFPSOverlay();
 
@@ -69,7 +65,6 @@ private:
     };
 
     struct FPS _fps;
-#endif
 };
 
 #endif // VLCQT_PHONON_GLSLPAINTER_H_

@@ -60,6 +60,10 @@ SET(VLCQT_QML_SRCS
 #####################
 # Compiler settings #
 #####################
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    SET(OPENGL_LIBRARY "-weak_framework OpenGL")
+ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+
 INCLUDE_DIRECTORIES(
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/src/core
@@ -129,6 +133,9 @@ ELSE(QT5)
     TARGET_LINK_LIBRARIES(${VLCQT_QML} ${QT_LIBRARIES} ${VLCQT_BINARY} ${LIBVLCCORE_LIBRARY})
 ENDIF(QT5)
 
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    TARGET_LINK_LIBRARIES(${VLCQT_QML} ${OPENGL_LIBRARY})
+ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 ################
 # Installation #
